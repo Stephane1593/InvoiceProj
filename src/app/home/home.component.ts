@@ -53,7 +53,6 @@ export class HomeComponent implements OnInit {
     this.service.getServices().subscribe( data =>{
       this.ServiceList = data.Result;
       this.loading = false;
-      console.log("Data: ", this.ServiceList )
     });
   }
 
@@ -71,23 +70,20 @@ export class HomeComponent implements OnInit {
        if(!flag){
           this.cartProductList.push(item)
        }
-      
+
        this.cartProductList.forEach(el =>{
          el.TotalPrice = el.Price * el.Qty;
        })
 
-       console.log("productList: ", this.cartProductList)
        this.calc(this.cartProductList)
 
     }catch(error){
-        
+      console.log(error)
     }
   }
 
   deleteProduct(item:any, index){
     try{
-      console.log("item: ", item)
-        console.log("index: ", index)
       this.cartProductList.forEach(el =>{
         if(el.ServiceDescription === item.ServiceDescription){
           el.Qty -=1;
@@ -100,11 +96,10 @@ export class HomeComponent implements OnInit {
           el.Qty = 1;
         }
       });
-      console.log("productList: ", this.cartProductList)
       this.calc(this.cartProductList)
 
     }catch(error){
-
+      console.log(error)
     }
   }
 
@@ -116,7 +111,6 @@ export class HomeComponent implements OnInit {
       this.subTotal = 0;
       this.taxDue = 0;
       this.other = 0;
-      console.log("cardList ", cardList)
       //  taxable total
       for(let x = 0; x  < cardList.length; x++){
         if(cardList[x].Taxed === "tax"){
@@ -132,16 +126,11 @@ export class HomeComponent implements OnInit {
       //taxDue
       this.taxDue = (this.taxRate * this.taxable) / 100;
 
-      //Total 
+      //Total
       this.total = this.subTotal + this.taxDue + this.other;
 
-
-      console.log("taxable:", this.taxable)
-      console.log("subtotal:", this.subTotal)
-      console.log("taxDue:", this.taxDue)
-      console.log("total: ", this.total)
     }catch(error){
-
+      console.log(error)
     }
 
   }
@@ -153,14 +142,14 @@ export class HomeComponent implements OnInit {
       var customerId = Math.floor(Math.random() * 1000000000);
       this.cartProductList.forEach(el =>{
         el.CustomerId = customerId.toString();
-        
+
       });
 
       var now  =  new Date();
       var dateString = moment(now).format('YYYY-MM-DD');
       var myDate = moment(dateString).add(1,'M');
       var futureDate = moment(myDate).format('YYYY-MM-DD');
-      
+
       body = {
         "IssuedDate": dateString.toString(),
         "DueDate": futureDate.toString(),
@@ -177,10 +166,10 @@ export class HomeComponent implements OnInit {
         "AllPurchases": this.cartProductList
       }
 
-      console.log("client: ",body)
+
       if(this.firstname && this.lastname && this.address && this.city && this.postalCode && this.companyName && this.contact && this.state){
         this.service.addInvoices(body).subscribe(res =>{
-          console.log("response: ", res)
+
           this.viewButton = true;
           // reset values
           this.cartProductList = [];
@@ -192,21 +181,19 @@ export class HomeComponent implements OnInit {
           this.companyName = "";
           this.contact = "";
           this.state = "";
-  
+
           // ----- removing null values
           type structure = any[]|any;
           const myRes:structure = res;
-          this.invoiceObject = myRes.map(obj => 
+          this.invoiceObject = myRes.map(obj =>
             Object.keys(obj).filter(e => obj[e] !== null).reduce((o, e) =>{o[e] = obj[e]; return o;},{})
           )
-          console.log("finalResp: ", this.invoiceObject)
-             
         });
       }
 
 
     }catch(error){
-
+       console.log(error)
     }
   }
 
@@ -219,7 +206,7 @@ export class HomeComponent implements OnInit {
       });
 
     }catch(error){
-
+      console.log(error)
     }
   }
 
