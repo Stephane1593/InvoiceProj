@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
     this.getService();
   }
 
-  // retrieve all services
+  // retrieve all services available from the DB
   getService(){
     this.service.getServices().subscribe( data =>{
       this.ServiceList = data.Result;
@@ -56,9 +56,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  // add products to cart
   addProduct(item:any){
     try{
-       console.log("product: ", item)
        let flag = false;
        this.cartProductList.forEach(el => {
          if(el.ServiceDescription === item.ServiceDescription){
@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit {
       console.log(error)
     }
   }
-
+// delete product
   deleteProduct(item:any, index){
     try{
       this.cartProductList.forEach(el =>{
@@ -168,6 +168,7 @@ export class HomeComponent implements OnInit {
 
 
       if(this.firstname && this.lastname && this.address && this.city && this.postalCode && this.companyName && this.contact && this.state){
+        // insert client details and services to the DB
         this.service.addInvoices(body).subscribe(res =>{
 
           this.viewButton = true;
