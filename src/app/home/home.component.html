@@ -1,0 +1,193 @@
+<div class="details-container">
+    <div class="title">
+        <h3>Client details <span *ngIf="!companyName || !firstname || !lastname || !address || !city || !postalCode || !state || !contact" style="color: red;">*</span></h3>
+    </div>
+
+    <div class="user-details">
+        <form class="example-form">
+
+
+            <table class="example-full-width" cellspacing="0">
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Company Name</mat-label>
+                            <input matInput  placeholder="Ex. Google" [(ngModel)]="companyName" [ngModelOptions]="{standalone: true}">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>First name</mat-label>
+                            <input matInput [(ngModel)]="firstname" [ngModelOptions]="{standalone: true}">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Last Name</mat-label>
+                            <input  matInput [(ngModel)]="lastname" [ngModelOptions]="{standalone: true}">
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+
+            <p>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Address</mat-label>
+                    <textarea matInput placeholder="Ex. 100 Main St" [(ngModel)]="address" [ngModelOptions]="{standalone: true}" ></textarea>
+                </mat-form-field>
+            </p>
+
+            <table class="example-full-width" cellspacing="0">
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>City</mat-label>
+                            <input matInput placeholder="Ex. San Francisco" [(ngModel)]="city" [ngModelOptions]="{standalone: true}">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Province</mat-label>
+                            <input matInput placeholder="Ex. California" [(ngModel)]="state" [ngModelOptions]="{standalone: true}">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Postal Code</mat-label>
+                            <input matInput  maxlength="5" placeholder="Ex. 94105" [(ngModel)]="postalCode" [ngModelOptions]="{standalone: true}">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Telephone</mat-label>
+                            <span matPrefix>+27 &nbsp;</span>
+                            <input type="tel" matInput placeholder="555-555-1234" [(ngModel)]="contact" [ngModelOptions]="{standalone: true}">
+                          </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</div>
+
+<div *ngIf="!loading"  class="service-container">
+    <mat-card class="service-list-card">
+        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+        <mat-card-title>Services</mat-card-title>
+        <mat-card-content>
+            <Table class="product-table">
+                <ng-container *ngFor="let pro of ServiceList ">
+                    <tr>
+                        <td>
+                            <span class="product-name">
+                                {{pro.ServiceDescription}}
+                            </span>
+                            <span class="product-price">
+                                R&nbsp;{{pro.Price}}
+                            </span>
+                            <span class="fab">
+                                <button mat-mini-fab color="primary" (click)="addProduct(pro)">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </span>
+                        </td>
+                    </tr>
+                </ng-container>
+
+            </Table>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+            <!-- <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button> -->
+        </mat-card-actions>
+        <mat-card-footer>
+            <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+        </mat-card-footer>
+    </mat-card>
+
+    <mat-card class="service-list-total">
+        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+        <mat-card-title>Cart({{cartProductList.length}})</mat-card-title>
+        <mat-card-content *ngIf="cartProductList.length == 0">
+            <p>Empty</p>
+
+        </mat-card-content>
+        <mat-card-content *ngIf="cartProductList.length > 0">
+            <Table class="selected-product-table">
+                <ng-container *ngFor="let ca of cartProductList; let i = index">
+                    <tr>
+                        <td>
+                            <span class="delete-fab">
+                                <button mat-mini-fab color="primary" (click)="deleteProduct(ca,i)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </span>
+                            <span class="selected-product-price">
+                                R&nbsp;{{ca.TotalPrice}}
+                            </span>
+                            <span [matBadge]="ca.Taxed" matBadgeColor="warn" matBadgeOverlap="false"
+                                class="selected-product-name">
+                                {{ca.ServiceDescription}}
+                            </span>
+                            <span class="selected-product-qty">
+
+                                <button mat-mini-fab color="primary"> {{ca.Qty}}</button>
+                            </span>
+
+
+                        </td>
+                    </tr>
+                </ng-container>
+
+            </Table>
+
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+            <table *ngIf="cartProductList.length > 0" class="total-table">
+                <tr>
+                    <td>Sub total</td>
+                    <td align="right" class="values">R&nbsp;{{subTotal}}</td>
+                </tr>
+                <tr>
+                    <td>Taxable</td>
+                    <td align="right" class=" values">R&nbsp;{{taxable}}</td>
+                </tr>
+                <tr>
+                    <td>Tax rate</td>
+                    <td align="right" class=" values">{{taxRate}}%</td>
+                </tr>
+                <tr>
+                    <td>Tax due</td>
+                    <td align="right" class=" values">R&nbsp;{{taxDue}}</td>
+                </tr>
+                <tr>
+                    <td>Other</td>
+                    <td align="right" class=" values">R&nbsp;{{other}}</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td align="right" class=" values">R&nbsp;{{total}}</td>
+                </tr>
+            </table>
+            <table *ngIf="cartProductList.length > 0" class="button-table">
+                <tr>
+                    <td align="right"> <button mat-raised-button color="primary" (click)="buy()">Place Order</button></td>
+                  
+                </tr>
+            </table>
+        </mat-card-actions>
+        <mat-card-footer>
+            <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+        </mat-card-footer>
+    </mat-card>
+ 
+</div>
+<div *ngIf="loading" class="spinner">
+ <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="viewButton " class="button-view-container">
+    <button mat-raised-button color="primary" (click)="viewInvoice()">View Invoice</button>
+</div>

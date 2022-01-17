@@ -1,0 +1,146 @@
+.details-container {
+  margin: 0 auto;
+  width: 90%;
+  margin-bottom: 2%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 5px;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+td {
+  padding-right: 8px;
+}
+
+/* ------------------------------------ */
+.product-table {
+  width: 98%;
+}
+
+.product-table tr {
+  width: 100%;
+}
+.product-table td {
+  border: 1px solid gainsboro;
+  width: 100%;
+  padding: 10px;
+}
+.product-price {
+  font-size: large;
+  font-style: italic;
+  font-weight: bold;
+  margin-left: 10px;
+}
+.product-name {
+  font-size: large;
+ 
+}
+
+.fab {
+  float: right;
+}
+/* ---------------------------------------- */
+.selected-product-table {
+  width: 98%;
+}
+
+.selected-product-table td {
+  border: 1px solid gainsboro;
+  width: 100%;
+  padding: 10px;
+}
+
+.selected-product-name {
+  font-size: large;
+  
+  float: right;
+  position: relative;
+  left: -40px;
+}
+
+.selected-product-price {
+  font-size: large;
+  font-style: italic;
+  font-weight: bold;
+  float: right;
+  position: relative;
+  left: -10px;
+}
+
+.selected-product-qty {
+}
+
+.delete-fab {
+  float: right;
+}
+/* --------------------------------------- */
+.title {
+  position: relative;
+  top: 10px;
+  margin-left: 10px;
+}
+
+mat-form-field {
+  margin-left: 50px;
+}
+
+.service-container {
+  display: flex;
+  margin-bottom: 1%;
+  padding-bottom: 2%;
+}
+.service-list-card {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin-left: 7.5%;
+  width: 40%;
+}
+
+.service-list-total {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin-left: 2%;
+  width: 40%;
+}
+
+/* -------------- */
+.total-table{
+    float: right;
+    border: 1px solid gainsboro;
+    width: 40%;
+}
+
+.total-table .values{
+    float: right;
+    width: 70%;
+    border: 1px solid gainsboro;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.buy-button{
+   text-align: end;
+}
+
+.button-table{
+    width: 100%;
+}
+
+.button-view-container{
+   text-align: center;
+   padding-bottom: 3%;
+}
+
+.spinner{
+  margin:0 auto;
+  text-align: center;
+}
+
+mat-spinner{
+  margin:0 auto;
+}

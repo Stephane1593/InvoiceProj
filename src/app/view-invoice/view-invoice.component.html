@@ -1,0 +1,216 @@
+<div class="invoice-border">
+    <table class="company-entete">
+        <!-- space -->
+        <tr>
+            <td colspan="4">&nbsp;</td>
+        </tr>
+        <!-- space -->
+        <tr>
+            <td align="left" class="title" colspan="2">
+                Quick Service
+            </td>
+            <td align="right" class="title-invoice" colspan="2">
+                INVOICE
+            </td>
+        </tr>
+        <tr>
+            <!-- left -->
+            <td class="small" width="65%">304 Oak Avenue Ferndale</td>
+            <td></td>
+            <!-- right -->
+            <td  width="10%"></td>
+            <td   width="12%"></td>
+        </tr>
+        <tr>
+            <td class="small">Johannesburg</td>
+            <td></td>
+            <td class="small-padding-right" align="right">Date</td>
+            <td class="small-border" align="center">{{invoiceDetails[0].IssuedDate}}</td>
+
+        </tr>
+        <tr>
+            <td class="small">+27825429872</td>
+            <td></td>
+            <td class="small-padding-right" align="right">Invoice #</td>
+            <td class="small-border" align="center">{{invoiceDetails[0].InvoiceId}}</td>
+
+        </tr>
+        <tr>
+            <td class="small">0000955557</td>
+            <td></td>
+            <td class="small-padding-right" align="right">Customer ID</td>
+            <td class="small-border" align="center">{{invoiceDetails[0].CustomerId}}</td>
+        </tr>
+        <tr>
+            <td class="small">www.QuicKService.com</td>
+            <td></td>
+            <td class="small-padding-right" align="right">Due Date</td>
+            <td class="small-border light-blue" align="center">{{invoiceDetails[0].DueDate}}</td>
+        </tr>
+        <!-- space -->
+        <tr>
+            <td colspan="4">&nbsp;</td>
+        </tr>
+        <!-- space -->
+        <!-- client details -->
+        <tr>
+            <td class="medium">BILL TO</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="small">{{invoiceDetails[0].CustomerFirstName}}&nbsp;{{invoiceDetails[0].CustomerLastName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="small">{{invoiceDetails[0].companyName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="small">{{invoiceDetails[0].StreetName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="small">{{invoiceDetails[0].CityName}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="small">{{invoiceDetails[0].PhoneNumber}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <!-- client details -->
+        <!-- space -->
+        <tr>
+            <td colspan="4">&nbsp;</td>
+        </tr>
+        <!-- space -->
+        <tr>
+            <td class="medium" align="center">DESCRIPTION</td>
+            <td class="medium"></td>
+            <td class="medium" align="center">TAXED</td>
+            <td class="medium" align="center">AMOUNT</td>
+        </tr>
+        <!-- looping service details -->
+        <tr *ngFor="let inv of invoiceDetails | slice: 1; let i = index; last as isLast">
+            <td class="small border-left-right" [ngClass]="{'grey-color': i % 2 == 0}" colspan="2" >{{inv.ServiceDescription}} x {{inv.Qty}} </td>
+            <td class="small border-left-right" [ngClass]="{'grey-color': i % 2 == 0}" align="center" >{{inv.Taxed}}</td>
+            <td class="small border-left-right" [ngClass]="{'grey-color': i % 2 == 0}" align="right" ><Span style="float: left;">R</Span> {{inv.TotalPrice}}</td>
+        </tr>
+        <tr>
+            <td class="small border-left-right grey-color" colspan="2">&nbsp;</td>
+            <td class="small border-left-right grey-color" ></td>
+            <td class="small border-left-right grey-color" ></td>
+        </tr>
+        <tr>
+            <td class="small border-left-right" colspan="2">&nbsp;</td>
+            <td class="small border-left-right" ></td>
+            <td class="small border-left-right" ></td>
+        </tr>
+        <tr>
+            <td class="small border-left-right grey-color" colspan="2">&nbsp;</td>
+            <td class="small border-left-right grey-color" ></td>
+            <td class="small border-left-right grey-color" ></td>
+        </tr>
+        <tr>
+            <td class="small border-left-right" colspan="2">&nbsp;</td>
+            <td class="small border-left-right" ></td>
+            <td class="small border-left-right" ></td>
+        </tr>
+        <tr>
+            <td class="border-bottom-left-right  grey-color" colspan="2" >&nbsp;</td>
+            <td class="border-bottom-left-right  grey-color" ></td>
+            <td class="border-bottom-left-right  grey-color" ></td>
+        </tr>
+        <!-- looping service details -->
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="small">Sub tolal</td>
+            <td class="small" align="right">{{subTotal}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="small">Taxable</td>
+            <td class="small" align="right">{{taxable}}</td>
+        </tr>
+        <tr>
+            <td class="medium">OTHER COMMENTS</td>
+            <td></td>
+            <td class="small">Tax rate</td>
+            <td class="small box" align="right">{{taxRate}}%</td>
+        </tr>
+        <tr>
+            <td class="small border-left-right" >1. Total payment due in 30 days.</td>
+            <td></td>
+            <td class="small">Tax due</td>
+            <td class="small" align="right">{{taxDue}}</td>
+        </tr>
+        <tr>
+            <td class="small border-left-right">2. Please inclue the invoice number on your check</td>
+            <td></td>
+            <td class="small">Other</td>
+            <td class="small box" align="right">-</td>
+        </tr>
+        <tr>
+            <td class="border-left-right"></td>
+            <td></td>
+            <td class="small">Total</td>
+            <td class="small total separate" align="right"><Span style="float: left;">R</Span> {{total}}</td>
+        </tr>
+        <!-- space -->
+        <tr>
+            <td class="border-left-right">&nbsp;</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <!-- space -->
+        <tr>
+            <td class="border-left-right"></td>
+            <td></td>
+            <td class="small" colspan="2" align="center">Make all checks payable to</td>
+        </tr>
+        <tr>
+            <td class="border-bottom-left-right"></td>
+            <td></td>
+            <td class="small" colspan="2" align="center">Quick Service</td>
+        </tr>
+        <!-- space -->
+        <tr>
+            <td colspan="4">&nbsp;</td>
+        </tr>
+        <!-- space -->
+        <tr>
+            <td colspan="4" class="small" align="center">If you have any questions about this invoice, please contact
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="small" align="center">Stephane 0825429872 QuickService@gmail.com</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="small-italic" align="center">Thank You for your Business!</td>
+        </tr>
+        <!-- space -->
+        <tr>
+            <td colspan="4">&nbsp;</td>
+        </tr>
+        <!-- space -->
+        <!-- space -->
+        <tr>
+            <td colspan="4">&nbsp;</td>
+        </tr>
+        <!-- space -->
+    </table>
+</div>
